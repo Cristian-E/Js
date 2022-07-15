@@ -1,32 +1,60 @@
+//! Primera Entrega Del Proyecto final 
 
-//! Trabajo 2 
+//el programa se puede iniciar 3 veces
+let lista_disponible = 3;
 
-const nombre = prompt("Ingresa tu nombre")
 
-let precio = 0
+function listaProducto() {
 
-alert("Hola " + nombre + " Bienvenido a Kitito")
+    let canastaProducto = [];
 
-let modeloCelular = prompt("Por favor ingresa tu modelo samsung = 1, iphone = 2, motorola = 3")
+    //creo un maximo de 3 objetos que se almacenaran en el array canastaProducto
+    for (let i = 0; i < 3; i++) {
 
-while (modeloCelular != 1 && modeloCelular != 2  && modeloCelular != 3) {
-    alert("El modelo no está disponible")
-    modeloCelular = prompt("Por favor ingresa tu modelo samsung = 1, iphone = 2, motorola = 3")
+        let pedido = {
+            producto: prompt("Ingresa el nombre de un producto (maximo 3)"),
+            valor: parseInt(prompt("Ingresa el valor del producto"))
+        }
+
+        canastaProducto.push(pedido)
+    }
+
+    //almaceno los productos en un nuevo array
+    const productos = canastaProducto.map(item => item.producto)
+
+    console.log("los productos son: ", productos)
+
+    //almaceno los valores en un nuevo array
+    const valorProductos = canastaProducto.map(item => item.valor)
+
+    console.log("valores: ", valorProductos);
+
+    //suma de los productos
+    let sumaTotalProductos = valorProductos.reduce(function (valorAnterior, valorSiguiente) {
+        return valorAnterior + valorSiguiente;
+    });
+
+    console.log("valor de productos: ", sumaTotalProductos);
+
+    alert("Los productos son " + productos + "y la suma total de su valor es: " + sumaTotalProductos);
+
+    let metodoDePago = prompt("¿Desea abonarlo en efectivo? ").toLowerCase();
+
+    let valorRecargado = sumaTotalProductos * 1.15
+
+    if (metodoDePago === "si") {
+        alert("Te esperamos mañana por nuestra sucursal para retirar y abonar su pedido")
+        if (--lista_disponible > 0)
+            listaProducto()
+    }
+    else if (metodoDePago === "no") {
+        alert(`Abonando en tarjeta tiene un recargo del 15%. el precio final es:  ${valorRecargado}`);
+        if (--lista_disponible > 0)
+            listaProducto()
+    }
+
 }
 
-function mostrar (){
-    if (modeloCelular == 1) {
-    precio = 900
-    alert ("Su precio es de: " + precio)
+listaProducto()
 
-}else if(modeloCelular == 2){
-    precio = 1000
-    alert("Su precio es de: " + precio)
-
-}else(modeloCelular == 3)
-    precio = 800
-    alert ("Su precio es de " + precio)
-}
-
-//! Fin de Trabajo 2
-
+//! Primera Entrega Del Proyecto final //
